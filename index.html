@@ -1,0 +1,291 @@
+                
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VtaD Challenge 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // 修改为
+                        primary: '#0033A0',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta charset="UTF-8">
+    <title>链接颜色设置</title>
+    <style>
+        a:link {
+            color:rgba(0, 51, 160, 1);
+        }
+        a:visited {
+            color: purple; /* 已访问链接颜色 */
+        }
+        a:hover {
+            color: red; /* 鼠标悬停时链接颜色 */
+        }
+        /* 整体容器样式 */
+        .organizers {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+    </style>
+
+</head>
+<body class="font-inter bg-light text-dark">
+    <!-- Header -->
+    <header class="bg-primary text-white py-6">
+        <div class="container mx-auto px-4">
+            <!-- 增大标题尺寸 -->
+            <h1 class="text-4xl md:text-5xl font-bold text-center">Voice Timbre Attribute Detection Challenge 2025</h1>
+            <!-- <p class="text-center text-white/80 mt-2">2025.05.15-2025.09.XX</p> -->
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- About Section -->
+        <section class="mb-12">
+            <!-- 减小章节标题尺寸 -->
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-b pb-3">竞赛简介</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                本挑战赛以音色属性为对象，关注音色的可解释性，为此构建音色属性检测（Voice Timbre Attribute Detection，VtaD）任务。
+                该任务旨在辨认两句语音中的话者在音色属性上是否存在特定的强弱差异，其中，音色属性指听者通过听觉感知系统，借助语言对话者音色感知进行描述，
+                如明亮、粗糙、圆润等。具体地，本任务以一对语音为对象，基于对二者在特定音色属性强度差异假设，通过验证该假设是否成立，实现对音色属性差异的判定。
+                本挑战赛拟通过该任务加强对语音中话者音色属性的处理和建模研究，加深对音色的理解，进而推动包括可解释话者识别、提示控制的个性化语音合成技术等相关研究领域的发展。
+
+            </p>
+        </section>
+
+
+        <section class="mb-12">
+            <!-- 减小章节标题尺寸 -->
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-b pb-3">竞赛背景</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                NCMMSC2025-音色属性强度检测竞赛（VtaD），简称NCMMSC2025-VtaD是第二十届全国人机语音通讯学术会议（<a href="https://www.ncmmsc.org.cn/">NCMMSC2025</a>）的特殊议题之一，由中国科学技术大学、香港理工大学共同发起。本次竞赛的目的是促进对语音中话者音色属性的研究，进而推动相关领域的发展。NCMMSC2025-VaiD对所有个人和单位免费开放。
+                <br>
+                <br>
+                更多关于比赛基线模型，数据集，评估指标，参赛方式等细节请查看<a href="Evaluation_Plan.pdf">Voice Timbre Attribute Detection 2025 Challenge Evaluation Plan </a>。 
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <!-- 减小章节标题尺寸 -->
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-b pb-3">任务定义</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                给定分别来自说话者\(\text{A}\)和\(\text{B}\)的一对语音片段\(O_\text{A}\)和\(O_\text{B}\)，以及一个指定的音色属性描述符\(\text{v} \), VtaD的目的是去评估\(O_\text{A}\)中音色属性\(\text{v}\)的强度是否强于\(O_\text{B}\)中\(\text{v}\)的强度。
+                从数学角度而言，关于这种强度差异的假设被定义为\(H (O_\text{A}, O_\text{B}, \text{v})\), 其意味着在音色属性\(\text{v}\)上，\(O_\text{B}\)的强度强于\(O_\text{A}\)。具体来说，\(H \in \{0,1\} \), 其中\(H=1\)表示假设\(H\)是正确的，\(H=0\)则表示该假设不成立。
+                这一假设由VtaD算法函数\(F(O_\text{A}, O_\text{B}|\text{v}, \theta)\)来判定，其中\(\theta \)为算法参数。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <!-- 减小章节标题尺寸 -->
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-b pb-3">数据集</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                本次比赛采用<a href="https://ieeexplore.ieee.org/abstract/document/10950106">VCTK-RVA</a>数据集 [1]，该数据集在<a href="https://datashare.ed.ac.uk/handle/10283/3443">VCTK</a>公开数据库的基础上，以同性别为基础，标注了不同话者之间明显的音色属性强弱差异。总共包含18种音色属性：明亮，单薄，粗，细，低沉，干净，厚实，磁性，浑浊，沙哑，圆润，平淡，尖锐，干瘪，沉闷，柔和，通透，干哑。该数据库共选用VCTK中来自101个发音人的40892句语音，以\(\{话者\text{A}，话者\text{B}，音色属性\text{v}\}\)为一组发音人标注，表示\(话者\text{A}\)比\(话者\text{B}\)在属性\(\text{v}\)上更强。该数据集共包含6038组发音人音色差异标注数据，其中每组发音人在1至3个音色属性上有强弱标注。以下分别介绍本次挑战赛所采用的训练集和测试集。
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                训练集：描述话者总数:78个，话者对数：3408对。
+            </p>
+            
+            <p class="text-lg text-gray-700 leading-relaxed">
+                测试集：依据测试数据中的话者在训练集中出现与否，分别构建了可见话者测试集和未见话者测试集。其中可见话者集由在训练集中出现过的话者，但并未出现的话者对组成，共包含76个话者，235组话者对，94000组测试语音对；未见话者集由在训练集中未出现的话者组成的话者对构成，共包含由23个话者组成的229组话者对，测试语音组数为91600组。
+            </p>
+            
+            <br>
+            <br>
+
+            <p class="text-lg text-gray-500 leading-relaxed">
+                [1] Sheng Z Y, Liu L J, Ai Y, et al. Voice attribute editing with text prompt[J]. IEEE Transactions on Audio, Speech and Language Processing, 2025.
+            </p>
+        </section>
+
+
+        <section class="mb-12">
+            <!-- 减小章节标题尺寸 -->
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-b pb-3">评估指标</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                本挑战赛拟以语音句为对象检测话者属性强弱，采用确认和识别两种测试方式，分别以等错误率和准确率为性能评价指标。主办方提供一对语音之间音色的属性强弱假设，如\(H(O_\text{A},O_\text{B},\text{v})=1\)，确认测试中，参赛者需给出该假设置信度得分，进而结合标注计算等错误率；识别测试中，参赛者需给出该假设是否成立的判定结果，进而与标注进行对比以计算准确率。等错误率越低、准确率越高，性能越好。本挑战赛拟采取匿名排名方式，依据每组参赛者的等错误率和准确率进行排名。
+            </p>
+        </section>
+
+
+        <section class="mb-12">
+            <!-- 减小章节标题尺寸 -->
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-b pb-3">报名方式</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                每个团队请点击<a href="https://forms.cloud.microsoft/r/SHZUA3ih19?origin=lprLink">报名表格链接</a>或扫描下方二维码进行一次报名。参与者在报名成功后的24小时内会受到一份确认邮件，如何任何疑问请联系主办方：<a href="mailto:vtad2025_org@163.com">vtad2025_org@163.com</a>。
+                
+            </p>
+
+            <div style="display: flex; align-items: center; justify-content: center; height: 100px; margin: 50px;">
+                <img src="Cons.png" alt="示例图片" style="border-radius: 8px; max-width: 150%; max-height: 150%;" />
+              </div>
+
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-b pb-3">重要日期</h2>
+            <div class="space-y-4">
+                <!-- 新增时间线项目 -->
+                
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-32 md:pr-4 mb-2 md:mb-0">
+                        <span class="text-primary text-xl block text-justify">2025.05.15</span>
+                    </div>
+                    
+                    <div class="md:flex-1 md:pl-4 border-l-2 border-primary/20">
+                        <h3 class="text-xl ">挑战赛公布，开始注册报名。</h3>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-32 md:pr-4 mb-2 md:mb-0">
+                        <span class="text-primary text-xl block text-justify">2025.05.17</span>
+                    </div>
+                    <div class="md:flex-1 md:pl-4 border-l-2 border-primary/20">
+                        <h3 class="text-xl ">发布基线模型权重及代码，公布VCTK-RVA训练集。</h3>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-32 md:pr-4 mb-2 md:mb-0">
+                        <span class="text-primary  text-xl block text-justify">2025.06.27</span>
+                    </div>
+                    <div class="md:flex-1 md:pl-4 border-l-2 border-primary/20">
+                        <h3 class="text-xl ">发布测试集。</h3>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-32 md:pr-4 mb-2 md:mb-0">
+                        <span class="text-primary  text-xl block text-justify">2025.07.04</span>
+                    </div>
+                    
+                    <div class="md:flex-1 md:pl-4 border-l-2 border-primary/20">
+                        <h3 class="text-xl">参赛者提交结果的截止日期，提交途径和格式详见
+                            <a href="Evaluation_Plan.pdf">
+                                Evaluation Plan
+                            </a>。
+                        </h3>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-32 md:pr-4 mb-2 md:mb-0">
+                        <span class="text-primary  text-xl block text-justify">2025.07.11</span>
+                    </div>
+                    
+                    <div class="md:flex-1 md:pl-4 border-l-2 border-primary/20">
+                        <h3 class="text-xl">反馈评估结果，结果公布。</h3>
+                    </div>
+                </div>     
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-32 md:pr-4 mb-2 md:mb-0">
+                        <span class="text-primary  text-xl block text-justify">2025.07.25</span>
+                    </div>
+                    
+                    <div class="md:flex-1 md:pl-4 border-l-2 border-primary/20">
+                        <h3 class="text-xl">NCMMSC-VtaD 2025 论文截止日期（仅前5名团队）。 </h3>
+                    </div>
+                </div>           
+            </div>
+        </section>
+
+
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-b pb-3">组织者</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10"> <!-- 等距网格布局 -->
+                <!-- 组织者1 -->
+                <div class="text-center">
+                    <div class="w-56 h-56 mx-auto"> <!-- 固定容器大小 -->
+                        <img 
+                            src="imgs/journal_photo_liping1.jpg" 
+                            alt="陈丽萍" 
+                            class="w-full h-full object-cover rounded-lg"
+                            style="object-position: center 17%;" 
+                        >
+                    </div>
+                    <h3 class="mt-5 font-medium text-xl">陈丽萍</h3>
+                    <p class="text-gray-600">中国科学技术大学</p> 
+                </div>
+
+                <!-- 组织者3 -->
+                <div class="text-center">
+                    <div class="w-56 h-56 mx-auto"> <!-- 固定容器大小 -->
+                        <img 
+                            src="imgs/LEE Kong Aik photo.jpg" 
+                            alt="Kong Aik Lee" 
+                            class="w-full h-full object-cover rounded-lg"
+                            style="object-position: center 17%;" 
+                        >
+                    </div>
+                    <h3 class="mt-5 font-medium text-xl">Kong Aik Lee</h3>
+                    <p class="text-gray-600">香港理工大学</p> 
+                </div>
+
+                <!-- 组织者2 -->
+                <div class="text-center">
+                    <div class="w-56 h-56 mx-auto"> <!-- 固定容器大小 -->
+                        <img 
+                            src="imgs/Ling zhenhua.jpg" 
+                            alt="凌震华" 
+                            class="w-full h-full object-cover rounded-lg"
+                            style="object-position: center 17%;" 
+                        >
+                    </div>
+                    <h3 class="mt-5 font-medium text-xl">凌震华</h3>
+                    <p class="text-gray-600">中国科学技术大学</p> 
+                </div>
+
+
+            </div>
+        </section>
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; VtaD Challenge 2025. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>    
